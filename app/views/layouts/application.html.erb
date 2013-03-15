@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Library</title>
+  <%= stylesheet_link_tag    "css/bootstrap"%>
+  <%= javascript_include_tag "js/bootstrap" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <div class="container">
+
+    <div id="header">
+        <ul class="nav nav-pills">
+            <li>
+                <%= link_to "Strona główna", :controller=>"home", :action=>"index" %>
+            </li>
+            <li>
+                <%= link_to "Strona główna", :controller=>"home", :action=>"index" %>
+            </li>
+            <li>
+                <%= link_to "Strona główna", :controller=>"home", :action=>"index" %>
+            </li>
+        </ul>
+    </div>
+        <div class="row">
+            <div class="sidebar span3">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Książki</li>
+                    <li><a>test</a></li>
+                    <li><a>test</a></li>
+                    <li><a>test</a></li>
+                    <li class="nav-header">Filmy</li>
+                    <li><a>test</a></li>
+                    <li><a>test</a></li>
+                </ul>
+            </div>
+            <div class="main span8">
+            <ul class="breadcrumb">
+            <li>
+                <%= get_bread_crumb(request.fullpath) %>
+            </li>
+            </ul>
+
+            <%= yield %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
