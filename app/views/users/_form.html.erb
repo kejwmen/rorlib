@@ -1,0 +1,47 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2>Niepoprawny Formularz</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label(:first_name, "Imię") %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label(:last_name, "Nazwisko") %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label(:email, "e-mail") %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label(:password, "Hasło")%><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label(:password_confirmation, "Potwierdź hasło") %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
+    <%= f.label(:sex, "Płeć") %><br />
+	<%= f.select(:sex, %w{ Mężczyzna Kobieta }) %>
+  </div>
+<br />
+  <div class="field">
+    <%= f.label(:phone, "Numer telefonu") %><br />
+    <%= f.text_field :phone %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit("Utwórz konto") %>
+  </div>
+<% end %>

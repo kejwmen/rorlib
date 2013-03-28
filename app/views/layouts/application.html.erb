@@ -1,49 +1,75 @@
+<%# encoding: utf-8 %>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Library</title>
-  <%= stylesheet_link_tag    "css/bootstrap"%>
-  <%= javascript_include_tag "js/bootstrap" %>
-  <%= csrf_meta_tags %>
+	<title>Library</title>
+	<%= stylesheet_link_tag    "css/bootstrap"%>
+	<%= javascript_include_tag "js/bootstrap" %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
-    <div class="container">
+	<div class="container">
 
-    <div id="header">
-        <ul class="nav nav-pills">
-            <li>
-                <%= link_to "Strona główna", :controller=>"home", :action=>"index" %>
-            </li>
-            <li>
-                <%= link_to "Strona główna", :controller=>"home", :action=>"index" %>
-            </li>
-            <li>
-                <%= link_to "Strona główna", :controller=>"home", :action=>"index" %>
-            </li>
-        </ul>
-    </div>
-        <div class="row">
-            <div class="sidebar span3">
-                <ul class="nav nav-list">
-                    <li class="nav-header">Książki</li>
-                    <li><a>test</a></li>
-                    <li><a>test</a></li>
-                    <li><a>test</a></li>
-                    <li class="nav-header">Filmy</li>
-                    <li><a>test</a></li>
-                    <li><a>test</a></li>
-                </ul>
-            </div>
-            <div class="main span8">
-            <ul class="breadcrumb">
-            <li>
-                <%= get_bread_crumb(request.fullpath) %>
-            </li>
-            </ul>
+		<div id="header">
+			<ul class="nav nav-pills">
+				<li>
+					<%= link_to "Strona główna", :controller=>"home", :action=>"index" %>
+				</li>
+				<li>
+					<%= link_to "Strona główna", :controller=>"home", :action=>"index" %>
+				</li>
+				<li>
+					<%= link_to "O autorach", :controller=>"home", :action=>"about" %>
+				</li>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="sidebar span3">
+				<ul class="nav nav-list">
+					<li class="nav-header">Książki</li>
+					<li>
+						<%= link_to "Według tytułów", :controller => "books", :action => "index" %>
+					</li>
+					<li>
+						<%= link_to "Według autorów", :controller => "authors", :action => "index" %>
+					</li>
+					<li>
+						<%= link_to "Według kategorii", :controller => "categories", :action => "index" %>	
+					</li>
+					<li class="nav-header">Filmy</li>
+					<li><a>test</a></li>
+					<li><a>test</a></li>
+				</ul>
+				<ul class="nav nav-list">
+					<% if current_user %>
+					<li class="nav-header">Konto <%= current_user.email %></li>
+					<li>
+						<%= link_to "Wyloguj", log_out_path %>
+					</li>
+					<% else %>
+					<li class="nav-header">Konto</li>
+					<li>
+						<%= link_to "Zaloguj", log_in_path %>
+					</li>
+					<li>
+						<%= link_to "Zarejestruj", sign_up_path %>
+					</li>
+					<% end %>
+				</ul>
+			</div>
+			<% flash.each do |name, msg| %>
+				<%= content_tag :div, msg, :id => "flash_#{name}" %>
+			<% end %>
+			<div class="main span8">
+				<ul class="breadcrumb">
+					<li>
+						<%= get_bread_crumb(request.fullpath) %>
+					</li>
+				</ul>
 
-            <%= yield %>
-            </div>
-        </div>
-    </div>
+				<%= yield %>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

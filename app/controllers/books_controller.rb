@@ -1,4 +1,6 @@
+# encoding: utf-8
 class BooksController < ApplicationController
+  skip_before_filter :authenticate_session, :only => [:index, :show]
   # GET /books
   # GET /books.json
   def index
@@ -36,6 +38,8 @@ class BooksController < ApplicationController
   # GET /books/1/edit
   def edit
     @book = Book.find(params[:id])
+    @authors = Author.all
+    @categories = Category.all
   end
 
   # POST /books
@@ -45,7 +49,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.html { redirect_to @book, notice: 'Dodano wpis.' }
         format.json { render json: @book, status: :created, location: @book }
       else
         format.html { render action: "new" }
@@ -61,7 +65,7 @@ class BooksController < ApplicationController
     @book.authors.destroy_all unless params[:book].has_key?('author_ids')
     respond_to do |format|
       if @book.update_attributes(params[:book])
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        format.html { redirect_to @book, notice: 'Wpis został zaktualizowany.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

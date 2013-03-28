@@ -1,9 +1,9 @@
-<h1>Listing authors</h1>
+<h1>Autorzy</h1>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Description</th>
+    <th>Imię</th>
+    <th>Opis</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,15 +11,18 @@
 
 <% @authors.each do |author| %>
   <tr>
-    <td><%= author.name %></td>
+    <td><%= link_to author.name, :controller => "authors", :action => "show", :id => author.id %></td>
     <td><%= author.description %></td>
-    <td><%= link_to 'Show', author %></td>
-    <td><%= link_to 'Edit', edit_author_path(author) %></td>
-    <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% if current_user %>
+    <td><%= link_to 'Pokaż', author, :class=>"btn btn-info" %></td>
+    <td><%= link_to 'Edytuj', edit_author_path(author), :class=>"btn btn-warning" %></td>
+    <td><%= link_to 'Usuń', author, method: :delete, data: { confirm: 'Jesteś pewien?' }, :class=>"btn btn-danger" %></td>
+	<% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Author', new_author_path %>
+<% if current_user %>
+<%= link_to 'Nowy autor', new_author_path, :class=>"btn btn-primary" %>
+<% end %>

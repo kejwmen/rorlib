@@ -27,18 +27,32 @@
     <%= f.label :year %><br />
     <%= f.number_field :year %>
   </div>
+
+  <div class="field">
+    Autorzy<br />
+  <% @authors.each do |author| %>
+  <li>
+    <label>
+    <%= check_box_tag 'book[author_ids][]', author.id, @book.author_ids.include?(author.id), id: dom_id(author), class: 'author-checkbox' %>
+    <%= author.name %>
+    </label>
+    </li>
+  <% end %>
+  </div>
+
+  <div class="field">
+    Kategorie<br />
+  <% @categories.each do |category| %>
+  <li>
+  <label>
+    <%= check_box_tag 'book[category_ids][]', category.id, @book.author_ids.include?(category.id), id: dom_id(category), class: 'category-checkbox' %>
+  <%= category.name %>
+  </label>
+  </li>
+  <% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
-
-  <%= @authors.each do |author| %>
-  <li>
-    <%= check_box_tag 'book[author_ids][]', author.id, @book.author_ids.include?(author.id), id: dom_id(author), class: 'author-checkbox' %>
-  </li>
-    <% end %>
-  <%= @categories.each do |category| %>
-  <li>
-    <%= check_box_tag 'book[category_ids][]', category.id, @book.author_ids.include?(category.id), id: dom_id(category), class: 'category-checkbox' %>
-  </li>
-  <% end %>
 <% end %>

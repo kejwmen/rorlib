@@ -1,9 +1,9 @@
-<h1>Listing categories</h1>
+<h1>Kategorie</h1>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Description</th>
+    <th>Nazwa</th>
+    <th>Opis</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,15 +11,19 @@
 
 <% @categories.each do |category| %>
   <tr>
-    <td><%= category.name %></td>
+    <td><%= link_to category.name, :controller => "categories", :action => "show", :id => category.id %></td>
     <td><%= category.description %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% if current_user %>
+    <td><%= link_to 'Pokaż', category, :class=>"btn btn-info" %></td>
+    <td><%= link_to 'Edytuj', edit_category_path(category), :class=>"btn btn-warning" %></td>
+    <td><%= link_to 'Usuń', category, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %></td>
+	<% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Category', new_category_path %>
+<% if current_user %>
+<%= link_to 'Nowa kategoria', new_category_path, :class=>"btn btn-primary" %>
+<% end %>

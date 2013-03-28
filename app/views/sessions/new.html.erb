@@ -1,0 +1,14 @@
+<h1>Zaloguj</h1> 
+
+<%= form_tag sessions_path do %>
+<div class="field">
+	<%= label_tag(:email, "e-mail") %>
+	<%= text_field_tag :email, params[:email] %>
+</div>
+<div class="field">
+	<%= label_tag(:password, "Hasło") %>
+	<%= password_field_tag :password %>
+</div>
+<%= submit_tag "Zaloguj", class: "btn btn-medium btn-primary" %>
+<% end %>
+<p><%=link_to("Utwórz konto", :controller => "users", :action => 'new')%>

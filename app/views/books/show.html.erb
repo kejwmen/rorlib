@@ -19,7 +19,20 @@
   <b>Year:</b>
   <%= @book.year %>
 </p>
+<p>
+<b>Autorzy:</b>
+<% @book.authors.each do |author| %>
+    <%= link_to author.name, :controller => "authors", :action => "show", :id => author.id %>
+<% end %>
+</p>
 
+<p>
+<b>Kategorie:</b>
+<% @book.categories.each do |category| %>
+    <%= link_to category.name, :controller => "categories", :action => "show", :id => category.id %>
+<% end %>
+</p>
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<% if current_user %>
+<%= link_to 'Edytuj', edit_book_path(@book), :class=>"btn btn-warning" %>
+<% end %>

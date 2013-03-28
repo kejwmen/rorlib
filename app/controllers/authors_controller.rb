@@ -1,4 +1,5 @@
 class AuthorsController < ApplicationController
+  skip_before_filter :authenticate_session, :only => [:index, :show]
   # GET /authors
   # GET /authors.json
   def index

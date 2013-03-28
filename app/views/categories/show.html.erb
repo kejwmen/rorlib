@@ -1,15 +1,44 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>Nazwa:</b>
   <%= @category.name %>
 </p>
 
 <p>
-  <b>Description:</b>
+  <b>Opis:</b>
   <%= @category.description %>
 </p>
 
+<p>
+  <b>Ksiazki:</b>
+</p>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<table>
+  <tr>
+    <th>Tytuł</th>
+    <th>Opis</th>
+    <th>Isbn</th>
+    <th>Rok</th>
+    <th>Kategoria</th>
+  </tr>
+
+<% @category.books.each do |book| %>
+  <tr>
+    <td><%= link_to book.title, :controller => "books", :action => "show", :id => book.id %></td>
+    <td><%= link_to book.description, :controller => "books", :action => "show", :id => book.id %></td>
+    <td><%= link_to book.isbn, :controller => "books", :action => "show", :id => book.id %></td>
+    <td><%= link_to book.year, :controller => "books", :action => "show", :id => book.id %></td>
+    <td>
+    <% book.authors.each do |author| %>
+    <%= link_to author.name, :controller => "authors", :action => "show", :id => author.id %>
+    <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+
+<% if current_user %>
+<%= link_to 'Edytuj', edit_category_path(@category), :class=>"btn btn-warning" %>
+<% end %>

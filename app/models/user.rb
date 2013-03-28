@@ -1,0 +1,27 @@
+require 'bcrypt'
+class User < ActiveRecord::Base
+  attr_accessible :email, :first_name, :last_name, :permissions, :phone, :sex, :password, :password_confirmation
+
+  attr_accessor :password
+  before_save :encrypt_password
+  validates :password, :confirmation => true
+  validates_presence_of :password, :on => :create
+  validates :email, :uniqueness => {:case_sensitive => false}, :presence => true, :format => {
+                :with    => /^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i,
+                :message => "Niepoprawny adres" }
+  validates_uniqueness_of :email, :case_sensitive => false
+  def self.authenticate(email, password)
+    if user = find_by_email(email)
+      if BCrypt::Password.new(user.password_hash).is_password? password
+        return user
+      end
+    end
+    return nil
+  end
+  
+  def encrypt_password
+    if password.present?
+      self.password_hash = BCrypt::Password.create(password)
+    end
+  end
+end
