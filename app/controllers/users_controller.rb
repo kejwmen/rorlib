@@ -1,6 +1,6 @@
 # encoding: utf-8
 class UsersController < ApplicationController
-  skip_before_filter :authenticate_session, :only => [:new]
+  skip_before_filter :authenticate_session, :only => [:new, :create]
   # GET /users
   # GET /users.json
   def index
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
       if @user.save
         redirect_to root_url, :notice => 'Zarejestrowano!'
       else
-        format.html { render action: "new" }
+        format.html { redirect_to root_url }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

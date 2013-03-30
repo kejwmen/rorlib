@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   def self.authenticate(email, password)
     user = find_by_email(email)
-    if user && BCrypt::Password.new(user.password_hash).is_password? password
+    if user && (BCrypt::Password.new(user.password_hash).is_password? password)
       user
     else
       nil
