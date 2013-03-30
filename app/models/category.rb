@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  attr_accessible :description, :name, :book_ids
+  attr_accessible :description, :name
 
   has_many :books_categories
   has_many :books, :through => :books_categories
