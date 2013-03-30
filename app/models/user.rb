@@ -6,10 +6,11 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   validates :password, :confirmation => true
   validates_presence_of :password, :on => :create
+  validates :phone, :presence  => true, :format => {:with => /^([0-9]{9})|(([0-9]{3}-){2}[0-9]{3})$/i, :message => "Niepoprawny numer telefonu"}
   validates :email, :uniqueness => {:case_sensitive => false}, :presence => true, :format => {
                 :with    => /^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i,
                 :message => "Niepoprawny adres" }
-  validates_uniqueness_of :email, :case_sensitive => false
+  validates_presence_of :first_name, :last_name, :sex
   def self.authenticate(email, password)
     if user = find_by_email(email)
       if BCrypt::Password.new(user.password_hash).is_password? password

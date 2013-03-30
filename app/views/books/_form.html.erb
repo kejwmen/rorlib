@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :year %><br />
-    <%= f.number_field :year %>
+    <%= select_tag "year", (Date.today.year.downto(Date.today.year-100)).map{|year| "<option>#{year}</option>"}.join.html_safe %>
   </div>
 
   <div class="field">

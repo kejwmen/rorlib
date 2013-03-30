@@ -1,2 +1,7 @@
 <h1>Strona glowna</h1>
-<p>test</p>
+<p>Ostatnie książki</p>
+<div id="latests">
+	<% Book.last(5).reverse.each do |l| %>
+		<%= link_to l.title, :controller => "books", :action => "show", :id => l.id %>
+	<% end %>
+</div>

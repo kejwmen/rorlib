@@ -5,7 +5,7 @@ def get_bread_crumb(url)
     breadcrumb = ''
     sofar = '/'
     elements = url.split('/')
-    breadcrumb += "<a href=/>Strona Glowna</a> -> "
+    breadcrumb += "<a href=/>Strona Glowna</a> / "
     for i in 1...elements.size
       sofar += elements[i] + '/'
       if i%2 == 0
@@ -17,7 +17,7 @@ def get_bread_crumb(url)
       else
         breadcrumb += "<a href='#{sofar}'>#{elements[i].pluralize}</a>"
       end
-      breadcrumb += ' -> ' if i != elements.size - 1
+      breadcrumb += ' / ' if i != elements.size - 1
     end
     breadcrumb = breadcrumb.html_safe
   rescue

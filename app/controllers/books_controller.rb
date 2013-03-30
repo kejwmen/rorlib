@@ -1,6 +1,7 @@
 # encoding: utf-8
 class BooksController < ApplicationController
   skip_before_filter :authenticate_session, :only => [:index, :show]
+  before_filter :is_admin?, :only => [:new]
   # GET /books
   # GET /books.json
   def index

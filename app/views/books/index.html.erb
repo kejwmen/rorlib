@@ -1,7 +1,7 @@
 <%# encoding: utf-8 %>
 <h1>Książki</h1>
 
-<table>
+<table width=100%>
 	<tr>
 		<th>Tytuł</th>
 		<th>Opis</th>
@@ -31,9 +31,9 @@
 			<% end %>
 		</td>
 		<% if current_user %>
-		<td><%= link_to 'Pokaż', book, :class=>"btn btn-info" %></td>
-		<td><%= link_to 'Edytuj', edit_book_path(book), :class=>"btn btn-warning" %></td>
-		<td><%= link_to 'Usuń', book, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger"  %></td>
+		<td class="btn-small"><%= link_to 'Pokaż', book, :class=>"btn btn-small btn-info" %></td>
+		<td><%= link_to 'Edytuj', edit_book_path(book), :class=>"btn btn-small btn-warning" %></td>
+		<td><%= link_to 'Usuń', book, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-small btn-danger"  %></td>
 		<% end %>
 	</tr>
 	<% end %>

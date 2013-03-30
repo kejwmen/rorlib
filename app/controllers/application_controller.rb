@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_charset
@@ -14,6 +15,14 @@ class ApplicationController < ActionController::Base
       redirect_to '/sessions/new'
     end
   end
+  
+  def is_admin?
+    unless !(current_user.permissions != "admin")
+      flash[:error] = "Nie masz uprawnień"
+      redirect_to '/'
+    end
+  end
+  
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end

@@ -21,7 +21,8 @@ end
 gem 'jquery-rails'
 gem 'will_paginate'
 gem 'bcrypt-ruby', :require => 'bcrypt'
-
+gem 'faker'
+gem 'populator'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
@@ -32,4 +33,4 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'
