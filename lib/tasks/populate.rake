@@ -4,19 +4,19 @@ namespace :db do
   task :populate => :environment do
     require 'populator'
     require 'faker'
-    
+
     [Book, Category, Author].each(&:delete_all)
-    
+
     Category.populate 25 do |category|
       category.name = Populator.words(1..3).titleize
       category.description = Populator.sentences(5..25)
     end
-    
+
     Author.populate 25 do |a|
       a.name = Faker::Name.name
       a.description = Populator.words(5..25)
     end
-    
+
     Book.populate 200 do |book|
       book.title = Populator.words(1..5).titleize
       book.description = Populator.sentences(2..10)
@@ -24,13 +24,22 @@ namespace :db do
       book.isbn = [*('A'..'Z'),*('0'..'9')].sample(13).join
       book.created_at = 2.years.ago..Time.now
     end
-    AuthorsBooks.populate 1..30 do |ab|
-      ab.author_id = 1..25
-      ab.book_id = 1..25
-    end
-    BooksCategories.populate 1..30 do |bc|
-      bc.book_id = 1..25
-      bc.category_id = 1..25
+
+    Book.all.each do |book|
+      # Gets up to 3 numbers from 1-25
+      # 1.9.3-p374 :013 > (1..25).to_a.sample(rand(3)+1)
+      #  => [17]
+      # 1.9.3-p374 :014 > (1..25).to_a.sample(rand(3)+1)
+      #  => [5, 16]
+      # 1.9.3-p374 :015 > (1..25).to_a.sample(rand(3)+1)
+      #  => [9, 10, 5]
+      # 1.9.3-p374 :016 > (1..25).to_a.sample(rand(3)+1)
+      #  => [3, 16]
+      rand = (1..25).to_a.sample(rand(3)+1)
+      book.authors = Author.find(rand)
+      rand = (1..25).to_a.sample(rand(3)+1)
+      book.categories = Category.find(rand)
+      book.save
     end
   end
 end
