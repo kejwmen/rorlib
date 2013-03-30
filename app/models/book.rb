@@ -1,5 +1,5 @@
 class Book < ActiveRecord::Base
-  attr_accessible :description, :isbn, :title, :year, :author_ids, :category_ids
+  attr_accessible :description, :isbn, :title, :year
 
   has_many :authors_books
   has_many :authors, :through => :authors_books
