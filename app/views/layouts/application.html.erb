@@ -9,17 +9,50 @@
 </head>
 <body>
 	<div class="container">
-
+		<div id="top">
+	<div id="left_top">
+		<div id="logo">
+		<a href="#"><%= image_tag("logo.png") %></a>
+		</div>
+	</div>
+	<div id="right_top">
+		<div id="buttons">
+			<a href="#"><%= image_tag("button1.jpg") %></a>
+			<a href="#"><%= image_tag("button2.jpg") %></a>
+			<a href="#"><%= image_tag("button3.jpg") %></a>
+		</div>
+		<div id="search">
+			<div id="search-text">SZUKAJ W KATALOGU</div>
+			<div id="search-pole">
+			<form action="...">
+			<input type="text" name="searchinput" value="Wpisz szukana pozycje"  maxlength="40"/>
+			</form>
+			</div>
+			<div id="search_button1">
+			
+			<a href="#"><%= image_tag("button_search.jpg") %></a>
+			</div> 
+			<div id="search_button2">
+			<a href="#"><%= image_tag("button2_search.jpg") %></a>
+			</div>
+		</div>
+	</DIV>
+</div>
 		<div class="navbar">
 		<div class="navbar-inner">
 		<div class="container" style="width: auto;">
-		<%= link_to "Library", {:controller=>"home", :action=>"index"}, :class => "brand" %>
 			<ul class="nav">
 				<li>
-					<%= link_to "Strona główna", :controller=>"home", :action=>"index" %>
+				<%= link_to "STRONA GŁÓWNA", {:controller=>"home", :action=>"index"}, :class => "brand" %>
 				</li>
 				<li>
-					<%= link_to "O autorach", :controller=>"home", :action=>"about" %>
+					<%= link_to "WYSZUKIWANIE", :controller=>"home", :action=>"index" %>
+				</li>
+				<li>
+					<%= link_to "MOJE KONTO", :controller=>"home", :action=>"about" %>
+				</li>
+				<li>
+					<%= link_to "POMOC", :controller=>"home", :action=>"about" %>
 				</li>
 			</ul>
 		</div>

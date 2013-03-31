@@ -1,4 +1,7 @@
 PublicRor::Application.routes.draw do
+  resources :borrows
+
+
   resources :users
 
 

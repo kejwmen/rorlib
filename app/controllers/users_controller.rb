@@ -45,9 +45,9 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     respond_to do |format|
       if @user.save
-        redirect_to root_url, :notice => 'Zarejestrowano!'
+        render :template => 'sessions/new' , :notice => 'Zarejestrowano!'
       else
-        format.html { redirect_to root_url }
+        format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @root_url, notice: 'Zaktualizowano.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
