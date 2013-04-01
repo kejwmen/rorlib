@@ -23,11 +23,8 @@
 		</div>
 		<div id="search">
 			<div id="search-text">SZUKAJ W KATALOGU</div>
-			<div id="search-pole">
-			<form action="...">
-			<input type="text" name="searchinput" value="Wpisz szukana pozycje"  maxlength="40"/>
-			</form>
-			</div>
+    
+
 			<div id="search_button1">
 			
 			<a href="#"><%= image_tag("button_search.jpg") %></a>
@@ -35,9 +32,9 @@
 			<div id="search_button2">
 			<a href="#"><%= image_tag("button2_search.jpg") %></a>
 			</div>
+						</div>
 		</div>
 	</DIV>
-</div>
 		<div class="navbar">
 		<div class="navbar-inner">
 		<div class="container" style="width: auto;">
@@ -79,7 +76,10 @@
 					<% if current_user %>
 					<li class="nav-header">Konto <%= current_user.email %></li>
 					<li>
-						
+					 <% if current_user.permissions == "admin" %>
+					   <%= link_to "Wszystkie wypożyczenia", {:controller => "borrows", :action => "admin"} %>
+					 <% end %>
+						<%= link_to "Moje wypożyczenia", borrows_path %>
 						<%= link_to "Wyloguj", log_out_path %>
 					</li>
 					<% else %>

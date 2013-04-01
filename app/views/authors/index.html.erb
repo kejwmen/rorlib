@@ -21,7 +21,7 @@
   </tr>
 <% end %>
 </table>
-
+<%= will_paginate @authors, :previous_label => 'Poprzednia', :next_label => 'Następna'  %>
 <br />
 <% if current_user %>
 <%= link_to 'Nowy autor', new_author_path, :class=>"btn btn-primary" %>

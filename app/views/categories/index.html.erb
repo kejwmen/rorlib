@@ -12,7 +12,7 @@
 <% @categories.each do |category| %>
   <tr>
     <td><%= link_to category.name, :controller => "categories", :action => "show", :id => category.id %></td>
-    <td><%= truncate(category.description, :length => 250) %></td>
+    <td><%= truncate(category.description, :length => 100) %></td>
 	<% if current_user %>
     <td><%= link_to 'Pokaż', category, :class=>"btn btn-info" %></td>
     <td><%= link_to 'Edytuj', edit_category_path(category), :class=>"btn btn-warning" %></td>
@@ -21,7 +21,7 @@
   </tr>
 <% end %>
 </table>
-
+<%= will_paginate @categories, :previous_label => 'Poprzednia', :next_label => 'Następna'  %>
 <br />
 
 <% if current_user %>

@@ -17,7 +17,7 @@
 	<% @books.each do |book| %>
 	<tr>
 		<td><%= link_to book.title, :controller => "books", :action => "show", :id => book.id %></td>
-		<td><%= truncate(book.description, :length => 100) %></td>
+		<td><%= truncate(book.description, :length => 30) %></td>
 		<td><%= book.isbn %></td>
 		<td><%= book.year %></td>
 		<td>
@@ -30,15 +30,21 @@
 			<%= link_to category.name, :controller => "categories", :action => "show", :id => category.id %>
 			<% end %>
 		</td>
+		
+
+		<td><%= link_to 'Pokaż', book, :class=>"btn btn-small btn-info" %></td>
 		<% if current_user %>
-		<td class="btn-small"><%= link_to 'Pokaż', book, :class=>"btn btn-small btn-info" %></td>
+		<td><%= link_to 'Wypożycz', new_book_borrow_path(:book_id => book.id), :class=>"btn btn-small btn-info" %></td>
+		
+		<% if (current_user.permissions=="admin") %>
 		<td><%= link_to 'Edytuj', edit_book_path(book), :class=>"btn btn-small btn-warning" %></td>
-		<td><%= link_to 'Usuń', book, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-small btn-danger"  %></td>
+		<td><%= link_to 'Usuń', book, method: :delete, data: { confirm: 'Jesteś pewien?' }, :class=>"btn btn-small btn-danger"  %></td>
 		<% end %>
+		<% end %>		
 	</tr>
 	<% end %>
 </table>
-
+<%= will_paginate @books, :previous_label => 'Poprzednia', :next_label => 'Następna'  %>
 <br />
 
 <% if current_user %>

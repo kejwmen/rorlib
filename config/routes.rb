@@ -1,14 +1,20 @@
 PublicRor::Application.routes.draw do
+  
+  get "borrows/admin"
+
+  resources :books do
+    resources :borrows
+  end
   resources :borrows
 
 
   resources :users
 
-
+  get "books/search/" 
   get "home/index"
   get 'home/about'
   resources :categories
-
+  
 
   resources :authors
 

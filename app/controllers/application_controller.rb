@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   def is_admin?
     unless !(current_user.permissions != "admin")
       flash[:error] = "Nie masz uprawnień"
-      redirect_to '/'
+      redirect_to :back
     end
   end
   
