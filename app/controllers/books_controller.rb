@@ -1,12 +1,17 @@
 # encoding: utf-8
+# Controller of Books model
 class BooksController < ApplicationController
+
+  # Security filter skip method, applied for index and show actions
   skip_before_filter :authenticate_session, :only => [:index, :show]
+  
+  # Security filter method, applied for new action.
   before_filter :is_admin?, :only => [:new]
   # GET /books
   # GET /books.json
+  # Action lists all entities form database  
   def index
     @books = Book.paginate(:page => params[:page], :per_page => 10)
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @books }
@@ -15,6 +20,7 @@ class BooksController < ApplicationController
 
   # GET /books/1
   # GET /books/1.json
+  # Action shows specified entity details
   def show
     @book = Book.find(params[:id])
 
@@ -26,6 +32,7 @@ class BooksController < ApplicationController
 
   # GET /books/new
   # GET /books/new.json
+  # Action which shows entity creation form
   def new
     @book = Book.new
     @authors = Author.all
@@ -37,6 +44,7 @@ class BooksController < ApplicationController
   end
 
   # GET /books/1/edit
+  # Action which shows Author edit form
   def edit
     @book = Book.find(params[:id])
     @authors = Author.all
@@ -45,9 +53,9 @@ class BooksController < ApplicationController
 
   # POST /books
   # POST /books.json
+  # Action creates new entity, using form data as parameters
   def create
     @book = Book.new(params[:book])
-
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Dodano wpis.' }
@@ -61,6 +69,7 @@ class BooksController < ApplicationController
 
   # PUT /books/1
   # PUT /books/1.json
+  # Action changes specified entity, using form data as parameters
   def update
     @book = Book.find(params[:id])
     @book.authors.destroy_all unless params[:book].has_key?('author_ids')
@@ -77,6 +86,7 @@ class BooksController < ApplicationController
 
   # DELETE /books/1
   # DELETE /books/1.json
+  # Action destroys specified entity
   def destroy
     @book = Book.find(params[:id])
     @book.destroy
@@ -86,7 +96,8 @@ class BooksController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+  # Element of search system
+  # TODO
 def search
   @books = Book.search params[:search]
 end

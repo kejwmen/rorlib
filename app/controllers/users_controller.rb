@@ -45,7 +45,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     respond_to do |format|
       if @user.save
-        render :template => 'sessions/new' , :notice => 'Zarejestrowano!'
+        format.html {redirect_to new_session_path , :notice => 'Zarejestrowano!'}
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }

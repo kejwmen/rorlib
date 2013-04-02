@@ -42,3 +42,5 @@ group :development do
 end
 
 gem 'annotate'
+gem 'railroady'
+gem "rails-erd"

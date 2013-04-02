@@ -1,7 +1,14 @@
+# Controller of Authors model
 class AuthorsController < ApplicationController
+  
+  # Security filter skip method, applied for index and show actions
+  # Every user can access those actions
+  
   skip_before_filter :authenticate_session, :only => [:index, :show]
+  
   # GET /authors
   # GET /authors.json
+  # Action lists all entities form database
   def index
     @authors = Author.paginate(:page => params[:page], :per_page => 20)
 
@@ -13,6 +20,7 @@ class AuthorsController < ApplicationController
 
   # GET /authors/1
   # GET /authors/1.json
+  # Action shows specified entity details
   def show
     @author = Author.find(params[:id])
 
@@ -24,6 +32,7 @@ class AuthorsController < ApplicationController
 
   # GET /authors/new
   # GET /authors/new.json
+  # Action which shows entity creation form
   def new
     @author = Author.new
 
@@ -32,14 +41,15 @@ class AuthorsController < ApplicationController
       format.json { render json: @author }
     end
   end
-
   # GET /authors/1/edit
+  # Action which shows Author edit form
   def edit
     @author = Author.find(params[:id])
   end
 
   # POST /authors
   # POST /authors.json
+  # Action creates new entity, using form data as parameters
   def create
     @author = Author.new(params[:author])
 
@@ -56,6 +66,7 @@ class AuthorsController < ApplicationController
 
   # PUT /authors/1
   # PUT /authors/1.json
+  # Action changes specified entity, using form data as parameters
   def update
     @author = Author.find(params[:id])
 
@@ -72,6 +83,7 @@ class AuthorsController < ApplicationController
 
   # DELETE /authors/1
   # DELETE /authors/1.json
+  # Action destroys specified entity
   def destroy
     @author = Author.find(params[:id])
     @author.destroy
