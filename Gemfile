@@ -35,15 +35,10 @@ gem 'populator'
 # To use debugger
 gem 'debugger'
 
-group :development do
+group :development do #development gems
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
 end
 
-gem 'annotate'
-gem 'railroady'
-gem "rails-erd"
-gem "therubyracer"
-gem 'execjs'
-gem 'libv8'
+gem 'acts_as_indexed' # search engine

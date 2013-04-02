@@ -1,6 +1,8 @@
   # Books model. Stores books data.
 class Book < ActiveRecord::Base
   attr_accessible :description, :isbn, :title, :year
+  # search engine available fields
+  acts_as_indexed :fields => [:title, :description]
 
   # Association definition. M:N relation with author model, through authorsbooks model
   has_many :authors_books
@@ -15,13 +17,5 @@ class Book < ActiveRecord::Base
 
   # Data validation. Each entity must contain at least title, isbn and year
   validates_presence_of :title, :isbn, :year
-  
-  #search function. not fully imlemented yet. TODO
-def self.search(search)
-  condition = "%" + search + "%"
-  find(:all, :include => [:authors, :categories], :conditions => {:title => condition, :desription => condition, :authors => {:name => condition, :descriptiom => condition}, :categories => {:name => condition, :description => condition}})
-  
-  end
-
-  
+    
 end

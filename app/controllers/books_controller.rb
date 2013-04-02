@@ -3,7 +3,7 @@
 class BooksController < ApplicationController
 
   # Security filter skip method, applied for index and show actions
-  skip_before_filter :authenticate_session, :only => [:index, :show]
+  skip_before_filter :authenticate_session, :only => [:index, :show, :search]
   
   # Security filter method, applied for new action.
   before_filter :is_admin?, :only => [:new]
@@ -102,7 +102,14 @@ class BooksController < ApplicationController
   # Element of search system
   # TODO
 def search
-  @books = Book.search params[:search]
+  if params[:page].nil?
+  params[:page] = 1
+  end
+  if params[:query]
+    @books = Book.paginate_search(params[:query], :page => params[:page], :per_page => 10)
+      else
+  @books = Book.all
+  end
 end
 
 end

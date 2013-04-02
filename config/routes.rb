@@ -10,7 +10,6 @@ PublicRor::Application.routes.draw do
 
   resources :users
 
-  get "books/search/" 
   get "home/index"
   get 'home/about'
   resources :categories
@@ -23,6 +22,7 @@ PublicRor::Application.routes.draw do
 
   resources :sessions
   
+  get "search" => "books#search"
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "users#new", :as => "sign_up"

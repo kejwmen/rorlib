@@ -23,15 +23,10 @@
 		</div>
 		<div id="search">
 			<div id="search-text">SZUKAJ W KATALOGU</div>
-    
-
-			<div id="search_button1">
-			
-			<a href="#"><%= image_tag("button_search.jpg") %></a>
-			</div> 
-			<div id="search_button2">
-			<a href="#"><%= image_tag("button2_search.jpg") %></a>
-			</div>
+			<form action='/search'>
+  			 <input name="query" type="text" />
+			<input type="image" onclick="submit();" src="<%= asset_path("button_search.jpg") %>"/>
+  		</form>
 						</div>
 		</div>
 	</DIV>
@@ -40,7 +35,7 @@
 		<div class="container" style="width: auto;">
 			<ul class="nav">
 				<li>
-				<%= link_to "STRONA GŁÓWNA", {:controller=>"home", :action=>"index"}, :class => "brand" %>
+				<%= link_to "Library", {:controller=>"home", :action=>"index"}, :class => "brand" %>
 				</li>
 				<li>
 					<%= link_to "WYSZUKIWANIE", :controller=>"home", :action=>"index" %>
