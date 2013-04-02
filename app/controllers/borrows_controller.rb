@@ -1,7 +1,12 @@
+# encoding: utf-8
+# Controller for handling books borrow system
 class BorrowsController < ApplicationController
-before_filter :is_admin?, :only => [:admin, :destroy]
+# Security filter method, applied for admin, edit and destroy actions.
+before_filter :is_admin?, :only => [:admin, :destroy, :edit]
+
   # GET /borrows
   # GET /borrows.json
+  # Action lists all entities associated with current_user 
   def index
     @borrows = Borrow.find(:all, :conditions => {:user_id => current_user.id})
     respond_to do |format|
@@ -9,7 +14,8 @@ before_filter :is_admin?, :only => [:admin, :destroy]
       format.json { render json: @borrows }
     end
   end
-  
+
+  # Action lists all entities form database. Administrator action
   def admin
     @borrows = Borrow.all
     respond_to do |format|
@@ -17,7 +23,8 @@ before_filter :is_admin?, :only => [:admin, :destroy]
       format.json { render json: @borrows }
     end
   end
-  
+
+  # Currently not used
   # GET /borrows/1
   # GET /borrows/1.json
   def show
@@ -29,6 +36,7 @@ before_filter :is_admin?, :only => [:admin, :destroy]
     end
   end
 
+  # Action which shows entity creation form
   # GET /borrows/new
   # GET /borrows/new.json
   def new
@@ -41,15 +49,18 @@ before_filter :is_admin?, :only => [:admin, :destroy]
     end
   end
 
+  # Action which shows Borrow edit form. Administrative action.
   # GET /borrows/1/edit
   def edit
     @borrow = Borrow.find(params[:id])
   end
 
+  # Action creates new entity, using form data as parameters
   # POST /borrows
   # POST /borrows.json
   def create
     @borrow = Borrow.new(params[:borrow])
+    #assigning fixed data to the instance of class
     @borrow.book_id = session[:book_id]
     @borrow.user_id = current_user.id
     @borrow.date_return = Time.now.to_date() + 2.weeks
@@ -64,6 +75,7 @@ before_filter :is_admin?, :only => [:admin, :destroy]
     end
   end
 
+  # Action changes specified entity, using form data as parameters
   # PUT /borrows/1
   # PUT /borrows/1.json
   def update
@@ -80,6 +92,7 @@ before_filter :is_admin?, :only => [:admin, :destroy]
     end
   end
 
+  # Action destroys specified entity. Administrative action.
   # DELETE /borrows/1
   # DELETE /borrows/1.json
   def destroy

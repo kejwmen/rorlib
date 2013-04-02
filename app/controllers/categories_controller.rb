@@ -1,6 +1,11 @@
 # encoding: utf-8
+# Categories controller
 class CategoriesController < ApplicationController
+
+  # Skipping security filter for common actions
   skip_before_filter :authenticate_session, :only => [:index, :show]
+
+  # Action lists all entities from database
   # GET /categories
   # GET /categories.json
   def index
@@ -12,6 +17,7 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # Action shows specified entity details
   # GET /categories/1
   # GET /categories/1.json
   def show
@@ -23,6 +29,7 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # Action which shows entity creation form
   # GET /categories/new
   # GET /categories/new.json
   def new
@@ -34,11 +41,13 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # Action which shows Book edit form
   # GET /categories/1/edit
   def edit
     @category = Category.find(params[:id])
   end
 
+  # Action creates new entity, using form data as parameters
   # POST /categories
   # POST /categories.json
   def create
@@ -55,6 +64,7 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # Action changes specified entity, using form data as parameters
   # PUT /categories/1
   # PUT /categories/1.json
   def update
@@ -71,6 +81,7 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # Action destroys specified entity
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy

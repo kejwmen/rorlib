@@ -1,17 +1,22 @@
 # encoding: utf-8
+
+# Users controller, register users
 class UsersController < ApplicationController
+  # Overrides ApplicationController method, skips it for new and create actions. Needed to allow users to register
   skip_before_filter :authenticate_session, :only => [:new, :create]
+
+  # Lists all users. Administrative usage
   # GET /users
   # GET /users.json
   def index
     @users = User.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
     end
   end
 
+  # Shows user details. Not implemented in views. Can be used for administrative actions
   # GET /users/1
   # GET /users/1.json
   def show
@@ -23,6 +28,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # Form display for registration
   # GET /users/new
   # GET /users/new.json
   def new
@@ -34,11 +40,13 @@ class UsersController < ApplicationController
     end
   end
 
+  # Displays user edit form. Not implemented in views. Can be used for password/user data change actions
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
   end
 
+  # Creates new user entity, params based on form data.
   # POST /users
   # POST /users.json
   def create
@@ -53,6 +61,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # Applies changes to user entity, based on edit form data. Not implemented.
   # PUT /users/1
   # PUT /users/1.json
   def update
@@ -69,6 +78,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # Destroys user entity. At this moment allowed only for administrator.
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy

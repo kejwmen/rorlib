@@ -7,9 +7,10 @@ class BooksController < ApplicationController
   
   # Security filter method, applied for new action.
   before_filter :is_admin?, :only => [:new]
+
+  # Action lists all entities from database  
   # GET /books
   # GET /books.json
-  # Action lists all entities form database  
   def index
     @books = Book.paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
@@ -18,9 +19,9 @@ class BooksController < ApplicationController
     end
   end
 
+  # Action shows specified entity details
   # GET /books/1
   # GET /books/1.json
-  # Action shows specified entity details
   def show
     @book = Book.find(params[:id])
 
@@ -30,11 +31,12 @@ class BooksController < ApplicationController
     end
   end
 
+  # Action which shows entity creation form
   # GET /books/new
   # GET /books/new.json
-  # Action which shows entity creation form
   def new
     @book = Book.new
+    #getting associated data
     @authors = Author.all
     @categories = Category.all
     respond_to do |format|
@@ -43,17 +45,18 @@ class BooksController < ApplicationController
     end
   end
 
+  # Action which shows Book edit form
   # GET /books/1/edit
-  # Action which shows Author edit form
   def edit
     @book = Book.find(params[:id])
+    #getting associated data
     @authors = Author.all
     @categories = Category.all
   end
 
+  # Action creates new entity, using form data as parameters
   # POST /books
   # POST /books.json
-  # Action creates new entity, using form data as parameters
   def create
     @book = Book.new(params[:book])
     respond_to do |format|
@@ -67,9 +70,9 @@ class BooksController < ApplicationController
     end
   end
 
+  # Action changes specified entity, using form data as parameters
   # PUT /books/1
   # PUT /books/1.json
-  # Action changes specified entity, using form data as parameters
   def update
     @book = Book.find(params[:id])
     @book.authors.destroy_all unless params[:book].has_key?('author_ids')
@@ -84,9 +87,9 @@ class BooksController < ApplicationController
     end
   end
 
+  # Action destroys specified entity
   # DELETE /books/1
   # DELETE /books/1.json
-  # Action destroys specified entity
   def destroy
     @book = Book.find(params[:id])
     @book.destroy

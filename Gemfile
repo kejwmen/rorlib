@@ -44,3 +44,6 @@ end
 gem 'annotate'
 gem 'railroady'
 gem "rails-erd"
+gem "therubyracer"
+gem 'execjs'
+gem 'libv8'
