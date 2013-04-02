@@ -1,0 +1,23 @@
+<h1>Wypożyczenia</h1>
+
+<table>
+  <tr>
+    <th>Tytuł książki</th>
+    <th>ISBN</th>
+    <th>Data zwrotu</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @borrows.each do |borrow| %>
+  <% @book = Book.find(borrow.book_id) %>
+  <tr>
+    <td><%= link_to @book.title, @book %></td>
+    <td><%= @book.isbn %></td>
+    <td><%= borrow.date_return %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

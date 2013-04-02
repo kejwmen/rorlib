@@ -1,0 +1,24 @@
+<%= form_for(@borrow) do |f| %>
+  <% if @borrow.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@borrow.errors.count, "error") %> prohibited this borrow from being saved:</h2>
+
+      <ul>
+      <% @borrow.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <input id="thing" type="hidden" value="<%= params[:book_id] %>" />
+  <div class="field">
+    <%= f.label "Książka" %>
+    <%= @book.title %><br />
+  </div>
+  <div class="field">
+    <%= current_user.first_name %><br />
+  </div>
+  <div class="actions">
+    <%= f.submit "Wypożycz" %>
+  </div>
+<% end %>
