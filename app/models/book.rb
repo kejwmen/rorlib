@@ -2,7 +2,7 @@
 class Book < ActiveRecord::Base
   attr_accessible :description, :isbn, :title, :year
   # search engine available fields
-  acts_as_indexed :fields => [:title, :description]
+  acts_as_indexed :fields => [:title]
 
   # Association definition. M:N relation with author model, through authorsbooks model
   has_many :authors_books

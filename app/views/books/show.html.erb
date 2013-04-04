@@ -33,8 +33,10 @@
 <% end %>
 </p>
 <% if current_user %>
+		<% if (@book.available=true) %>
 <td><%= link_to 'Wypożycz', new_book_borrow_path(:book_id => @book.id), :class=>"btn btn-small btn-info" %></td>
-
+		
+<% end %>
 
 <% if (current_user.permissions=="admin") %>
 <td><%= link_to 'Edytuj', edit_book_path(@book), :class=>"btn btn-small btn-warning" %></td>

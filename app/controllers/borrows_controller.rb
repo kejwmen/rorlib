@@ -64,8 +64,11 @@ before_filter :is_admin?, :only => [:admin, :destroy, :edit]
     @borrow.book_id = session[:book_id]
     @borrow.user_id = current_user.id
     @borrow.date_return = Time.now.to_date() + 2.weeks
+    @book = Book.find(session[:book_id])
     respond_to do |format|
       if @borrow.save
+        @book.available = false
+        @book.save
         format.html { redirect_to @borrow, notice: 'Borrow was successfully created.' }
         format.json { render json: @borrow, status: :created, location: @borrow }
       else
@@ -97,6 +100,8 @@ before_filter :is_admin?, :only => [:admin, :destroy, :edit]
   # DELETE /borrows/1.json
   def destroy
     @borrow = Borrow.find(params[:id])
+    @book = Book.find(@borrow.book_id)
+    @book.available = true
     @borrow.destroy
 
     respond_to do |format|

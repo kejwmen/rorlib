@@ -21,7 +21,7 @@ PublicRor::Application.routes.draw do
   resources :books
 
   resources :sessions
-  
+  get "home" => "home#index", :as => "home"
   get "search" => "books#search"
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"

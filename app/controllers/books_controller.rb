@@ -100,7 +100,6 @@ class BooksController < ApplicationController
     end
   end
   # Element of search system
-  # TODO
 def search
   if params[:page].nil?
   params[:page] = 1

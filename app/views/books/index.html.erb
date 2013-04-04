@@ -30,12 +30,11 @@
 			<%= link_to category.name, :controller => "categories", :action => "show", :id => category.id %>
 			<% end %>
 		</td>
-		
-
 		<td><%= link_to 'Pokaż', book, :class=>"btn btn-small btn-info" %></td>
 		<% if current_user %>
+		<% if (book.available==true) %>
 		<td><%= link_to 'Wypożycz', new_book_borrow_path(:book_id => book.id), :class=>"btn btn-small btn-info" %></td>
-		
+		<% end %>
 		<% if (current_user.permissions=="admin") %>
 		<td><%= link_to 'Edytuj', edit_book_path(book), :class=>"btn btn-small btn-warning" %></td>
 		<td><%= link_to 'Usuń', book, method: :delete, data: { confirm: 'Jesteś pewien?' }, :class=>"btn btn-small btn-danger"  %></td>
